@@ -1,4 +1,3 @@
-sk-lm-p52j6ymp:054qXhNnJ2LvBlDwZ4iT
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -306,24 +305,31 @@ sk-lm-p52j6ymp:054qXhNnJ2LvBlDwZ4iT
   .empty-state h2{margin:0 0 8px;color:var(--text);font-size:24px}
 
   .message-container{
-    width:100%;
     display:flex;
     flex-direction:column;
+    gap:6px;
+    width:fit-content;
+    max-width:min(780px, 78%);
+  }
+  .message-container.user{
+    align-self:flex-end;
+    margin-left:auto;
+  }
+  .message-container.bot,
+  .message-container.system{
+    align-self:flex-start;
+    margin-right:auto;
   }
   .message{
-    max-width:min(780px, 78%);
-    display:flex;
-    flex-direction:column;
-    gap:0;
+    width:fit-content;
+    max-width:100%;
+    display:block;
     word-wrap:break-word;
     overflow-wrap:anywhere;
     background:transparent;
     box-shadow:none;
     overflow:visible;
   }
-  .message-container.user{align-items:flex-end;}
-  .message-container.bot,
-  .message-container.system{align-items:flex-start;}
   .message-inner{
     padding:8px 12px;
     border-radius:18px;
@@ -370,15 +376,12 @@ sk-lm-p52j6ymp:054qXhNnJ2LvBlDwZ4iT
   .message-footer{
     display:flex;
     align-items:center;
-    justify-content:flex-end;
     gap:8px;
-    padding:6px 0 0;
+    padding:6px 8px 0;
     background:transparent;
   }
-  .message-container.bot .message-footer,
-  .message-container.system .message-footer{
-    justify-content:flex-start;
-  }
+  .message-footer.user{justify-content:flex-end}
+  .message-footer.bot,.message-footer.system{justify-content:flex-start}
   .msg-action{
     display:inline-flex;
     align-items:center;
@@ -472,7 +475,7 @@ sk-lm-p52j6ymp:054qXhNnJ2LvBlDwZ4iT
     background:transparent;
     line-height:1.45;
   }
-  .composer-actions{display:flex;gap:8px}
+  .composer-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
   .tool-btn{
     width:42px;
     height:42px;
@@ -506,6 +509,98 @@ sk-lm-p52j6ymp:054qXhNnJ2LvBlDwZ4iT
   .typing span:nth-child(3){animation-delay:.3s}
   @keyframes blink{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-2px)}}
   .stopped-note{font-size:12px;font-weight:400;color:var(--muted);letter-spacing:.01em}
+
+
+  .think-toggle{
+    width:auto;
+    min-width:92px;
+    height:42px;
+    padding:0 12px;
+    border-radius:999px;
+    background:#eef2f7;
+    border:1px solid #d5dce7;
+    color:var(--muted);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:none;
+  }
+  .think-toggle i{font-size:15px}
+  .think-toggle.is-on{
+    background:linear-gradient(135deg,var(--primary),var(--primary-2));
+    color:#fff;
+    border-color:transparent;
+    box-shadow:var(--shadow-soft);
+  }
+  .think-toggle:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+    transform:none;
+    box-shadow:none;
+  }
+
+  .assistant-stack{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .thinking-card{
+    border:1px solid #d9e2ee;
+    border-radius:16px;
+    background:#eef2f7;
+    overflow:hidden;
+    box-shadow:0 4px 14px rgba(15,23,42,.04);
+  }
+  .thinking-card.collapsed .thinking-body{display:none;}
+  .thinking-head{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:8px 10px;
+    border:none;
+    background:#e4eaf2;
+    color:#334155;
+    cursor:pointer;
+    text-align:left;
+  }
+  .thinking-head-left{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    min-width:0;
+    font-size:12px;
+    font-weight:800;
+  }
+  .thinking-head-left i{font-size:14px;color:var(--primary)}
+  .thinking-time{
+    font-size:11px;
+    color:#64748b;
+    white-space:nowrap;
+  }
+  .thinking-chevron{
+    font-size:16px;
+    color:#64748b;
+    transition:transform .18s ease;
+    flex:0 0 auto;
+  }
+  .thinking-card.collapsed .thinking-chevron{transform:rotate(-90deg);}
+  .thinking-body{
+    padding:10px 10px 11px;
+    color:#3f4a5a;
+    background:#eef2f7;
+    border-top:1px solid #d9e2ee;
+    white-space:normal;
+  }
+  .thinking-body .message-text{line-height:1.55}
+  .assistant-final{
+    display:block;
+  }
+
 
   @media (max-width:960px){
     .app{grid-template-columns:1fr;height:auto;min-height:100vh}
@@ -584,6 +679,7 @@ sk-lm-p52j6ymp:054qXhNnJ2LvBlDwZ4iT
             <textarea id="input" placeholder="Type your message..." rows="1"></textarea>
           </div>
           <div class="composer-actions">
+            <button class="tool-btn think-toggle" id="thinkBtn" title="Thinking mode" onclick="toggleThinkingMode()"><i class="ri-lightbulb-flash-line"></i><span>Think</span></button>
             <button class="tool-btn stop-ready" id="stopBtn" title="Stop generation" onclick="stopGeneration()"><i class="ri-stop-circle-line"></i></button>
             <button class="send" id="sendBtn" onclick="sendMessage()"><i class="ri-send-plane-2-line"></i> Send</button>
           </div>
@@ -595,12 +691,20 @@ sk-lm-p52j6ymp:054qXhNnJ2LvBlDwZ4iT
 
 <script>
 const DEFAULT_BASES = [
-  localStorage.getItem("lmstudio_base_url") || "http://localhost:1234",
+  localStorage.getItem("lmstudio_base_url") || "http://192.168.1.6:1234",
   "http://127.0.0.1:1234",
-  "http://192.168.1.4:1234"
+  "http://192.168.1.6:1234"
 ];
 const CHAT_ENDPOINTS = ["/v1/chat/completions", "/api/v0/chat/completions"];
 const MODEL_LIST_ENDPOINT = "/api/v0/models";
+
+/* Paste your LM Studio API key here */
+const LMSTUDIO_API_KEY = "sk-lm-p52j6ymp:054qXhNnJ2LvBlDwZ4iT";
+const REQUIRE_API_KEY = true;
+const ALLOWED_LOCALHOSTS = new Set(["localhost", "127.0.0.1", "::1"]);
+const ALLOW_PRIVATE_NETWORK = true;
+const MAX_RESPONSE_CHARS = 120000;
+const MAX_CONTEXT_MESSAGES = 24;
 
 let chats = JSON.parse(localStorage.getItem("all_chats") || "[]");
 let currentChatIndex = null;
@@ -610,12 +714,251 @@ let isGenerating = false;
 let currentAbortController = null;
 let activePlaceholder = null;
 let activePlaceholderChatIndex = null;
-let currentBaseUrl = localStorage.getItem("lmstudio_base_url") || "http://localhost:1234";
+let currentBaseUrl = normalizeBaseUrl(localStorage.getItem("lmstudio_base_url") || "http://192.168.1.6:1234");
 let generationToken = 0;
+let thinkingEnabled = false;
+let thinkingSupported = false;
+let activeLiveAssistant = null;
 
 function saveChats(){ localStorage.setItem("all_chats", JSON.stringify(chats)); }
 function saveModelSelection(){ localStorage.setItem("selected_model", selectedModel || ""); }
-function saveBaseUrl(){ localStorage.setItem("lmstudio_base_url", currentBaseUrl); }
+function saveBaseUrl(){ localStorage.setItem("lmstudio_base_url", normalizeBaseUrl(currentBaseUrl)); }
+
+function normalizeBaseUrl(value){
+  return String(value || "").trim().replace(/\/+$/, "");
+}
+
+function isPrivateIpHost(hostname){
+  if(!hostname) return false;
+  if(/^(10\.|192\.168\.|127\.|169\.254\.)/.test(hostname)) return true;
+  const m = hostname.match(/^172\.(\d+)\./);
+  if(m){
+    const second = Number(m[1]);
+    return second >= 16 && second <= 31;
+  }
+  return false;
+}
+
+function isSafeApiBase(baseUrl){
+  try{
+    const url = new URL(normalizeBaseUrl(baseUrl));
+    if(url.protocol !== "http:" && url.protocol !== "https:") return false;
+    if(ALLOWED_LOCALHOSTS.has(url.hostname)) return true;
+    if(ALLOW_PRIVATE_NETWORK && isPrivateIpHost(url.hostname)) return true;
+    return false;
+  }catch(_e){
+    return false;
+  }
+}
+
+function getAuthHeaders(){
+  const headers = {"Content-Type":"application/json"};
+  const apiKey = String(LMSTUDIO_API_KEY || "").trim();
+  if(REQUIRE_API_KEY && !apiKey){
+    throw new Error("API key missing");
+  }
+  if(apiKey){
+    headers.Authorization = `Bearer ${apiKey}`;
+  }
+  return headers;
+}
+
+async function fetchJsonWithTimeout(url, options = {}, timeoutMs = 120000){
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try{
+    const res = await fetch(url, { ...options, signal: controller.signal });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    if(!text) return {};
+    try{
+      return JSON.parse(text);
+    }catch(_e){
+      return { raw: text };
+    }
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+
+function detectThinkingCapability(modelName){
+  const name = String(modelName || "").toLowerCase();
+  if(!name) return false;
+  return /think|reason|reasoning|r1|qwq|deepseek|gemma-4|qwen3|o1|o3|thought/.test(name);
+}
+
+function syncThinkingAvailability(){
+  const btn = document.getElementById("thinkBtn");
+  thinkingSupported = detectThinkingCapability(selectedModel);
+  if(!thinkingSupported) thinkingEnabled = false;
+  if(!btn) return;
+  btn.disabled = !thinkingSupported;
+  btn.classList.toggle("is-on", thinkingEnabled && thinkingSupported);
+  btn.title = thinkingSupported
+    ? (thinkingEnabled ? "Thinking mode on" : "Thinking mode off")
+    : "Thinking not detected for this model";
+  const label = btn.querySelector("span");
+  if(label) label.textContent = "Think";
+}
+
+function toggleThinkingMode(){
+  if(!detectThinkingCapability(selectedModel)){
+    syncThinkingAvailability();
+    setStatus("Thinking not detected for this model");
+    return;
+  }
+  thinkingEnabled = !thinkingEnabled;
+  syncThinkingAvailability();
+  setStatus(thinkingEnabled ? "Thinking mode on" : "Thinking mode off");
+}
+
+function normalizeMessagePayload(message){
+  if(message && typeof message === "object"){
+    return {
+      role: message.role || "",
+      content: String(message.content ?? message.text ?? ""),
+      thinking: String(message.thinking ?? message.analysis ?? ""),
+      thinkingDuration: Number(message.thinkingDuration ?? message.duration ?? 0) || 0,
+      model: String(message.model ?? "")
+    };
+  }
+  return {
+    role: "",
+    content: String(message ?? ""),
+    thinking: "",
+    thinkingDuration: 0,
+    model: ""
+  };
+}
+
+function extractThinkingFromReply(rawText){
+  const text = normalizeAssistantText(rawText);
+  if(!text) return { thinking:"", finalText:"" };
+
+  const explicitPatterns = [
+    /<think>([\s\S]*?)<\/think>/i,
+    /<analysis>([\s\S]*?)<\/analysis>/i,
+    /<reasoning>([\s\S]*?)<\/reasoning>/i
+  ];
+
+  for(const pattern of explicitPatterns){
+    const match = text.match(pattern);
+    if(match){
+      const thinking = String(match[1] || "").trim();
+      const finalText = text.replace(pattern, "").trim();
+      return { thinking, finalText };
+    }
+  }
+
+  if(/^thinking process:/i.test(text) || /^thought for\s+\d/i.test(text)){
+    const parts = text.split(/\n\n+/);
+    if(parts.length > 1){
+      const thinking = parts.shift().trim();
+      const finalText = parts.join("\n\n").trim();
+      return { thinking, finalText };
+    }
+  }
+
+  return { thinking:"", finalText:text };
+}
+
+function escapeAttr(value){
+  return String(value || "").replaceAll("'", "&#039;");
+}
+
+function buildThinkingCard(thinking, durationSeconds, collapsed = true){
+  const durationLabel = Number.isFinite(durationSeconds) && durationSeconds > 0
+    ? `Thought for ${durationSeconds.toFixed(1)} seconds`
+    : "Thinking";
+  const body = formatText(thinking);
+  return `
+    <div class="thinking-card${collapsed ? " collapsed" : ""}">
+      <button class="thinking-head" type="button" onclick="toggleThinkingCard(this)">
+        <span class="thinking-head-left"><i class="ri-lightbulb-flash-line"></i><span>Thinking</span></span>
+        <span class="thinking-time">${escapeHtml(durationLabel)}</span>
+        <i class="ri-arrow-down-s-line thinking-chevron"></i>
+      </button>
+      <div class="thinking-body">
+        <div class="message-text">${body}</div>
+      </div>
+    </div>
+  `;
+}
+
+function toggleThinkingCard(button){
+  const card = button.closest(".thinking-card");
+  if(!card) return;
+  card.classList.toggle("collapsed");
+}
+
+function buildAssistantCopyMarkup(messageObj){
+  const data = normalizeMessagePayload(messageObj);
+  const fullText = [data.thinking, data.content].filter(Boolean).join(data.thinking ? "\n\n" : "");
+  return `<button class="msg-action" title="Copy message" onclick='copyText(${JSON.stringify(fullText)})'><i class="ri-file-copy-line"></i> Copy</button>`;
+}
+
+function renderAssistantMessageContent(messageObj, live = false){
+  const data = normalizeMessagePayload(messageObj);
+  const hasThinking = !live && Boolean(data.thinking && data.thinking.trim());
+  const thinkingHtml = hasThinking ? buildThinkingCard(data.thinking, data.thinkingDuration, true) : "";
+  const bodyHtml = live
+    ? `<div class="message-text">${formatText(data.content)}</div>`
+    : formatAssistantBody(data.content);
+  return `
+    <div class="message-inner">
+      <div class="message-meta">${escapeHtml(data.model || selectedModel || "AI model")}</div>
+      <div class="assistant-stack">
+        ${thinkingHtml}
+        <div class="assistant-final">${bodyHtml}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderUserOrSystemContent(messageObj, role){
+  const data = normalizeMessagePayload(messageObj);
+  if(role === "system"){
+    return `
+      <div class="message-inner">
+        <div class="message-meta"><span class="stopped-note">system note</span></div>
+        <div class="stopped-note">${escapeHtml(data.content)}</div>
+      </div>
+    `;
+  }
+  return `
+    <div class="message-inner">
+      <div class="message-meta"><i class="ri-user-3-line"></i> You</div>
+      <div class="message-text">${formatText(data.content)}</div>
+    </div>
+  `;
+}
+
+function buildLivePlaceholderNode(modelName){
+  const container = document.createElement("div");
+  container.className = "message-container bot";
+  container.innerHTML = `
+    <div class="message bot">
+      <div class="message-inner">
+        <div class="message-meta">${escapeHtml(modelName || selectedModel || "AI model")}</div>
+        <div class="assistant-stack">
+          <div class="assistant-final"><div class="message-text"><span class="typing"><span></span><span></span><span></span></span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="message-footer bot"></div>
+  `;
+  return container;
+}
+
+function updateLiveAssistantNode(node, liveText){
+  if(!node) return;
+  const finalBox = node.querySelector(".assistant-final");
+  if(finalBox){
+    finalBox.innerHTML = `<div class="message-text">${formatText(liveText)}</div>`;
+  }
+}
+
 
 function escapeHtml(str){
   return String(str)
@@ -862,7 +1205,7 @@ function buildPayload(messages){
     }
   }
   if(cleaned.length && cleaned[cleaned.length - 1].role === "assistant") cleaned.pop();
-  let trimmed = cleaned.slice(-12);
+  let trimmed = cleaned.slice(-MAX_CONTEXT_MESSAGES);
   if(trimmed.length && trimmed[0].role !== "user") trimmed.shift();
   return trimmed;
 }
@@ -910,7 +1253,7 @@ function buildMessageNode(text, role, modelName){
   }
 
   const footer = document.createElement("div");
-  footer.className = "message-footer";
+  footer.className = `message-footer ${role}`;
   if(role !== "system"){
     const copyBtn = document.createElement("button");
     copyBtn.className = "msg-action";
@@ -942,18 +1285,6 @@ function addSystemNote(text, saveToDom = true){
   if(saveToDom) scrollToBottom();
 }
 
-async function fetchJsonWithTimeout(url, timeoutMs = 5000){
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try{
-    const res = await fetch(url, { signal: controller.signal });
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 function normalizeLoadedModels(payload){
   const data = Array.isArray(payload?.data) ? payload.data : [];
   return data
@@ -977,9 +1308,15 @@ async function discoverModels(){
   let anyError = false;
 
   for(const base of DEFAULT_BASES){
-    const cleanBase = String(base || "").replace(/\/$/, "");
+    const cleanBase = normalizeBaseUrl(base);
+    if(!isSafeApiBase(cleanBase)) continue;
     try{
-      const payload = await fetchJsonWithTimeout(`${cleanBase}${MODEL_LIST_ENDPOINT}`);
+      const payload = await fetchJsonWithTimeout(`${cleanBase}${MODEL_LIST_ENDPOINT}`, {
+        method: "GET",
+        headers: getAuthHeaders(),
+        credentials: "omit",
+        cache: "no-store"
+      });
       const loaded = normalizeLoadedModels(payload);
       if(loaded.length){
         found = loaded;
@@ -1039,15 +1376,12 @@ function selectModelFromUI(){
 
 function fillTypingPlaceholder(){
   if(!activePlaceholder) return;
-  activePlaceholder.className = "message-container bot";
   activePlaceholder.innerHTML = `
-    <div class="message bot">
-      <div class="message-inner">
-        <div class="message-meta">${escapeHtml(selectedModel || "AI model")}</div>
-        <div class="message-text"><span class="typing"><span></span><span></span><span></span></span></div>
-      </div>
+    <div class="message-inner">
+      <div class="message-meta">${escapeHtml(selectedModel || "AI model")}</div>
+      <div class="message-text"><span class="typing"><span></span><span></span><span></span></span></div>
     </div>
-    <div class="message-footer"></div>
+    <div class="message-footer system"></div>
   `;
 }
 
@@ -1055,13 +1389,11 @@ function setStoppedPlaceholder(){
   if(!activePlaceholder) return;
   activePlaceholder.className = "message-container system";
   activePlaceholder.innerHTML = `
-    <div class="message system">
-      <div class="message-inner">
-        <div class="message-meta"><span class="stopped-note">system note</span></div>
-        <div class="stopped-note">model was stopped</div>
-      </div>
+    <div class="message-inner">
+      <div class="message-meta"><span class="stopped-note">system note</span></div>
+      <div class="stopped-note">model was stopped</div>
     </div>
-    <div class="message-footer"></div>
+    <div class="message-footer system"></div>
   `;
 }
 
@@ -1181,6 +1513,38 @@ async function readResponsePayload(response){
   }
 }
 
+async function fetchChatCompletion(body, signal){
+  let lastError = null;
+
+  for(const endpoint of CHAT_ENDPOINTS){
+    const url = `${currentBaseUrl}${endpoint}`;
+    try{
+      const response = await fetch(url, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        credentials: "omit",
+        cache: "no-store",
+        body: JSON.stringify(body),
+        signal
+      });
+
+      const data = await readResponsePayload(response);
+      if(!response.ok){
+        const detail = typeof data?.content === "string" && data.content.trim()
+          ? `: ${data.content.slice(0, 240)}`
+          : "";
+        throw new Error(`HTTP ${response.status}${detail}`);
+      }
+      return data;
+    }catch(err){
+      lastError = err;
+      if(err && err.name === "AbortError") throw err;
+    }
+  }
+
+  throw lastError || new Error("Request failed");
+}
+
 function buildAssistantCopyMarkup(reply){
   return `<button class="msg-action" title="Copy message" onclick='copyText(${JSON.stringify(reply)})'><i class="ri-file-copy-line"></i> Copy</button>`;
 }
@@ -1194,6 +1558,14 @@ async function sendMessage(){
   if(!text || isGenerating) return;
   if(!selectedModel){
     setStatus("No running model selected");
+    return;
+  }
+  if(!isSafeApiBase(currentBaseUrl)){
+    setStatus("Unsafe API base URL");
+    return;
+  }
+  if(REQUIRE_API_KEY && !String(LMSTUDIO_API_KEY || "").trim()){
+    setStatus("Paste API key first");
     return;
   }
 
@@ -1233,35 +1605,17 @@ async function sendMessage(){
 
   const payloadMessages = buildPayload(chat.messages);
   const estimatedOutput = text.length > 1200 ? 3072 : text.length > 600 ? 2048 : 1024;
-  let lastError = null;
 
   try{
-    let responseData = null;
-    for(const endpoint of CHAT_ENDPOINTS){
-      try{
-        const response = await fetch(`${currentBaseUrl}${endpoint}`, {
-          method:"POST",
-          headers:{"Content-Type":"application/json"},
-          signal: currentAbortController.signal,
-          body: JSON.stringify({
-            model: selectedModel,
-            messages: payloadMessages,
-            max_tokens: estimatedOutput,
-            temperature: 0.7,
-            stream: true
-          })
-        });
-        if(!response.ok) throw new Error(`HTTP ${response.status}`);
-        responseData = await readResponsePayload(response);
-        break;
-      }catch(err){
-        lastError = err;
-        if(err.name === "AbortError") throw err;
-      }
-    }
+    const responseData = await fetchChatCompletion({
+      model: selectedModel,
+      messages: payloadMessages,
+      max_tokens: estimatedOutput,
+      temperature: 0.7,
+      stream: true
+    }, currentAbortController.signal);
 
     if(requestId !== generationToken) return;
-    if(!responseData) throw lastError || new Error("No response");
 
     let reply = extractAssistantReply(responseData);
     if(!reply){
@@ -1277,7 +1631,7 @@ async function sendMessage(){
             ${formatAssistantBody(reply)}
           </div>
         </div>
-        <div class="message-footer">
+        <div class="message-footer bot">
           ${buildAssistantCopyMarkup(reply)}
         </div>
       `;
@@ -1303,7 +1657,7 @@ async function sendMessage(){
               <div class="stopped-note">connection error</div>
             </div>
           </div>
-          <div class="message-footer"></div>
+          <div class="message-footer system"></div>
         `;
       } else {
         addSystemNote("connection error");
@@ -1335,6 +1689,417 @@ function wireUp(){
   });
 }
 
+
+function renderModelSelect(){
+  const select = document.getElementById("modelSelect");
+  select.innerHTML = "";
+
+  if(!models.length){
+    const option = document.createElement("option");
+    option.value = "";
+    option.textContent = "No running models";
+    select.appendChild(option);
+    select.disabled = true;
+    syncThinkingAvailability();
+    return;
+  }
+
+  select.disabled = false;
+  models.forEach(model => {
+    const option = document.createElement("option");
+    option.value = model;
+    option.textContent = model;
+    if(model === selectedModel) option.selected = true;
+    select.appendChild(option);
+  });
+
+  syncThinkingAvailability();
+}
+
+function selectModelFromUI(){
+  const select = document.getElementById("modelSelect");
+  selectedModel = select.value;
+  saveModelSelection();
+  syncThinkingAvailability();
+  updateHeader();
+}
+
+function buildMessageNode(text, role, modelName){
+  const messageObj = normalizeMessagePayload(text);
+  const roleName = role || messageObj.role || "";
+  const container = document.createElement("div");
+  container.className = `message-container ${roleName}`;
+
+  const wrap = document.createElement("div");
+  wrap.className = `message ${roleName}`;
+
+  if(roleName === "bot"){
+    wrap.innerHTML = renderAssistantMessageContent(messageObj, Boolean(messageObj.streaming));
+  } else if(roleName === "user" || roleName === "system"){
+    wrap.innerHTML = renderUserOrSystemContent(messageObj, roleName);
+  } else {
+    wrap.innerHTML = `
+      <div class="message-inner">
+        <div class="message-meta">${escapeHtml(modelName || selectedModel || "AI model")}</div>
+        <div class="message-text">${formatText(messageObj.content)}</div>
+      </div>
+    `;
+  }
+
+  const footer = document.createElement("div");
+  footer.className = `message-footer ${roleName}`;
+  if(roleName !== "system"){
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "msg-action";
+    copyBtn.title = "Copy message";
+    copyBtn.innerHTML = '<i class="ri-file-copy-line"></i> Copy';
+    copyBtn.onclick = () => copyText(
+      roleName === "bot"
+        ? [messageObj.thinking, messageObj.content].filter(Boolean).join(messageObj.thinking ? "\n\n" : "")
+        : messageObj.content
+    );
+    footer.appendChild(copyBtn);
+  }
+
+  container.appendChild(wrap);
+  container.appendChild(footer);
+  return container;
+}
+
+function addMessage(text, role, saveToDom = true, modelName = ""){
+  const messagesDiv = document.getElementById("messages");
+  const empty = document.getElementById("emptyState");
+  if(empty) empty.remove();
+  const node = buildMessageNode(
+    typeof text === "object" ? text : { role, content:text, model:modelName },
+    role,
+    modelName
+  );
+  messagesDiv.appendChild(node);
+  if(saveToDom) scrollToBottom();
+}
+
+function addSystemNote(text, saveToDom = true){
+  const messagesDiv = document.getElementById("messages");
+  const empty = document.getElementById("emptyState");
+  if(empty) empty.remove();
+  messagesDiv.appendChild(buildMessageNode({ role:"system", content:text }, "system", ""));
+  if(saveToDom) scrollToBottom();
+}
+
+function renderMessages(){
+  const messagesDiv = document.getElementById("messages");
+  messagesDiv.innerHTML = "";
+  const chat = currentChatIndex !== null ? chats[currentChatIndex] : null;
+  if(!chat || !chat.messages.length){
+    showEmptyState();
+    return;
+  }
+  for(const m of chat.messages){
+    if(m.role === "system") addSystemNote(m.content, false);
+    else addMessage(m, m.role, false, m.model || "");
+  }
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function fillTypingPlaceholder(){
+  if(!activePlaceholder) return;
+  activePlaceholder.innerHTML = `
+    <div class="message-inner">
+      <div class="message-meta">${escapeHtml(selectedModel || "AI model")}</div>
+      <div class="assistant-stack">
+        <div class="assistant-final"><div class="message-text"><span class="typing"><span></span><span></span><span></span></span></div></div>
+      </div>
+    </div>
+  `;
+}
+
+function setStoppedPlaceholder(){
+  if(!activePlaceholder) return;
+  activePlaceholder.className = "message-container system";
+  activePlaceholder.innerHTML = `
+    <div class="message system">
+      <div class="message-inner">
+        <div class="message-meta"><span class="stopped-note">system note</span></div>
+        <div class="stopped-note">model was stopped</div>
+      </div>
+    </div>
+    <div class="message-footer system"></div>
+  `;
+}
+
+function updateActiveAssistantLive(text){
+  if(!activePlaceholder) return;
+  const liveText = String(text || "");
+  activePlaceholder.className = "message-container bot";
+  activePlaceholder.innerHTML = `
+    <div class="message bot">
+      <div class="message-inner">
+        <div class="message-meta">${escapeHtml(selectedModel || "AI model")}</div>
+        <div class="assistant-stack">
+          <div class="assistant-final"><div class="message-text">${formatText(liveText)}</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="message-footer bot"></div>
+  `;
+}
+
+function buildThinkingPrompt(){
+  return {
+    role:"system",
+    content:"Thinking mode is enabled. When useful, include a brief reasoning preview inside <think>...</think> and place the final answer outside those tags. Keep the final answer clean and concise."
+  };
+}
+
+async function streamChatCompletion(body, signal, onDelta){
+  const endpointAttempts = CHAT_ENDPOINTS.map(endpoint => `${currentBaseUrl}${endpoint}`);
+  let lastError = null;
+
+  for(const url of endpointAttempts){
+    try{
+      const response = await fetch(url, {
+        method:"POST",
+        headers:getAuthHeaders(),
+        credentials:"omit",
+        cache:"no-store",
+        body: JSON.stringify(body),
+        signal
+      });
+
+      if(!response.ok){
+        const text = await response.text().catch(() => "");
+        throw new Error(`HTTP ${response.status}${text ? `: ${text.slice(0,240)}` : ""}`);
+      }
+
+      const contentType = (response.headers.get("content-type") || "").toLowerCase();
+      if(!response.body || !contentType.includes("text/event-stream")){
+        const payload = await readResponsePayload(response);
+        const text = extractAssistantReply(payload);
+        if(text) onDelta(text, true);
+        return { rawText: text || "" };
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let rawText = "";
+
+      while(true){
+        const { value, done } = await reader.read();
+        if(done) break;
+        buffer += decoder.decode(value, { stream:true });
+        const lines = buffer.split(/\r?\n/);
+        buffer = lines.pop() || "";
+
+        for(const line of lines){
+          const trimmed = line.trim();
+          if(!trimmed.startsWith("data:")) continue;
+          const payload = trimmed.slice(5).trim();
+          if(!payload || payload === "[DONE]") continue;
+
+          let chunk = "";
+          try{
+            const obj = JSON.parse(payload);
+            chunk =
+              obj?.choices?.[0]?.delta?.content ??
+              obj?.choices?.[0]?.message?.content ??
+              obj?.choices?.[0]?.text ??
+              obj?.content ??
+              "";
+            if(Array.isArray(chunk)){
+              chunk = chunk.map(part => part?.text ?? part?.content ?? "").join("");
+            }
+          }catch(_e){
+            chunk = "";
+          }
+
+          if(typeof chunk === "string" && chunk){
+            rawText += chunk;
+            onDelta(rawText, false);
+          }
+        }
+      }
+
+      return { rawText };
+    }catch(err){
+      lastError = err;
+      if(err && err.name === "AbortError") throw err;
+    }
+  }
+
+  throw lastError || new Error("Request failed");
+}
+
+function buildFinalAssistantNode(messageObj){
+  const node = document.createElement("div");
+  node.className = "message-container bot";
+  const data = normalizeMessagePayload(messageObj);
+  node.innerHTML = `
+    <div class="message bot">
+      ${renderAssistantMessageContent(data, false)}
+    </div>
+    <div class="message-footer bot">
+      ${buildAssistantCopyMarkup(data)}
+    </div>
+  `;
+  return node;
+}
+
+async function sendMessage(){
+  const input = document.getElementById("input");
+  const sendBtn = document.getElementById("sendBtn");
+  const stopBtn = document.getElementById("stopBtn");
+  const text = input.value.trim();
+  if(!text || isGenerating) return;
+  if(!selectedModel){
+    setStatus("No running model selected");
+    return;
+  }
+  if(!isSafeApiBase(currentBaseUrl)){
+    setStatus("Unsafe API base URL");
+    return;
+  }
+  if(REQUIRE_API_KEY && !String(LMSTUDIO_API_KEY || "").trim()){
+    setStatus("Paste API key first");
+    return;
+  }
+
+  if(currentChatIndex === null) newChat();
+  const chat = chats[currentChatIndex];
+
+  addMessage({ role:"user", content:text }, "user");
+  chat.messages.push({ role:"user", content:text });
+
+  if(chat.messages.length === 1){
+    chat.title = makeSmartTitle(text);
+  }
+
+  input.value = "";
+  autoGrowTextarea(input);
+  saveChats();
+  renderChatList();
+  updateHeader();
+
+  isGenerating = true;
+  currentAbortController = new AbortController();
+  const requestId = ++generationToken;
+  sendBtn.disabled = true;
+  stopBtn.disabled = false;
+  stopBtn.classList.add("stop-ready");
+  setStatus("Thinking...");
+  document.getElementById("headerPill").innerHTML = '<span class="typing"><span></span><span></span><span></span></span> Generating reply';
+
+  activePlaceholder = buildLivePlaceholderNode(selectedModel);
+  activePlaceholderChatIndex = currentChatIndex;
+  const messagesDiv = document.getElementById("messages");
+  const empty = document.getElementById("emptyState");
+  if(empty) empty.remove();
+  messagesDiv.appendChild(activePlaceholder);
+  scrollToBottom();
+  fillTypingPlaceholder();
+  activeLiveAssistant = activePlaceholder;
+
+  const payloadMessages = buildPayload(chat.messages);
+  if(thinkingEnabled && thinkingSupported){
+    payloadMessages.unshift(buildThinkingPrompt());
+  }
+
+  const estimatedOutput = Math.min(8192, Math.max(768, Math.ceil(text.length * 2.5)));
+
+  try{
+    const startedAt = performance.now();
+    let latestRaw = "";
+    const result = await streamChatCompletion({
+      model: selectedModel,
+      messages: payloadMessages,
+      max_tokens: estimatedOutput,
+      temperature: 0.7,
+      stream: true
+    }, currentAbortController.signal, (liveText, done) => {
+      latestRaw = liveText;
+      if(activePlaceholder && activePlaceholderChatIndex === currentChatIndex){
+        updateActiveAssistantLive(liveText);
+        scrollToBottom();
+      }
+    });
+
+    if(requestId !== generationToken) return;
+
+    latestRaw = result.rawText || latestRaw || "";
+    let parsed = extractThinkingFromReply(latestRaw);
+    let finalText = parsed.finalText || latestRaw || "";
+    finalText = finalText.trim();
+    if(!finalText) finalText = "⚠️ Empty response";
+
+    const thinkingDuration = (performance.now() - startedAt) / 1000;
+    const assistantMessage = {
+      role:"assistant",
+      content: finalText,
+      thinking: parsed.thinking || "",
+      thinkingDuration: parsed.thinking ? thinkingDuration : 0,
+      model: selectedModel
+    };
+
+    if(activePlaceholder && activePlaceholderChatIndex === currentChatIndex){
+      activePlaceholder.replaceWith(buildFinalAssistantNode(assistantMessage));
+    } else {
+      addMessage(assistantMessage, "bot", true, selectedModel);
+    }
+
+    chat.messages.push(assistantMessage);
+    saveChats();
+    renderChatList();
+    updateHeader();
+    setStatus("Ready");
+    document.getElementById("headerPill").innerText = "✨ Reply ready";
+  }catch(e){
+    if(e.name !== "AbortError"){
+      console.error(e);
+      if(activePlaceholder && activePlaceholderChatIndex === currentChatIndex){
+        activePlaceholder.className = "message-container system";
+        activePlaceholder.innerHTML = `
+          <div class="message system">
+            <div class="message-inner">
+              <div class="message-meta"><span class="stopped-note">system note</span></div>
+              <div class="stopped-note">connection error</div>
+            </div>
+          </div>
+          <div class="message-footer system"></div>
+        `;
+      } else {
+        addSystemNote("connection error");
+      }
+      setStatus("Error");
+      document.getElementById("headerPill").innerText = "⚠️ Connection issue";
+    }
+  } finally {
+    if(requestId === generationToken){
+      isGenerating = false;
+      currentAbortController = null;
+      document.getElementById("sendBtn").disabled = false;
+      document.getElementById("stopBtn").disabled = false;
+      activePlaceholder = null;
+      activePlaceholderChatIndex = null;
+      activeLiveAssistant = null;
+      stopBtn.classList.remove("stop-ready");
+    }
+    scrollToBottom();
+  }
+}
+
+function wireUp(){
+  const input = document.getElementById("input");
+  input.addEventListener("input", (e) => autoGrowTextarea(e.target));
+  input.addEventListener("keydown", (e) => {
+    if(e.key === "Enter" && !e.shiftKey){
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+}
+
+
 // Tests
 console.assert(makeSmartTitle("hello there") === "Greeting by User", "Greeting title test failed");
 console.assert(parseSegments("hi```js\nlet a=1;\n```").length === 2, "Segment test failed");
@@ -1348,6 +2113,7 @@ async function init(){
   await discoverModels();
   renderModelSelect();
   updateHeader();
+  syncThinkingAvailability();
 }
 
 init();
