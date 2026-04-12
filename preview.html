@@ -61,6 +61,26 @@
             height: 100vh;
             gap: 18px;
             padding: 18px;
+            position: relative;
+            transition: grid-template-columns 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Desktop sidebar collapsed state */
+        .app.sidebar-collapsed {
+            grid-template-columns: 0px 1fr;
+            gap: 0;
+        }
+
+        .app.sidebar-collapsed .sidebar {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-20px);
+            width: 0;
+            min-width: 0;
+            overflow: hidden;
+            border: none;
+            padding: 0;
+            margin: 0;
         }
 
         .sidebar,
@@ -70,6 +90,10 @@
             border: 1px solid rgba(216, 226, 240, .75);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow);
+        }
+
+        .sidebar,
+        .chat-container {
             overflow: hidden;
         }
 
@@ -77,6 +101,7 @@
             display: flex;
             flex-direction: column;
             min-width: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .sidebar-top {
@@ -341,7 +366,61 @@
         .chat-container {
             display: flex;
             flex-direction: column;
-            min-width: 0
+            min-width: 0;
+            position: relative;
+            transition: border-radius 0.3s ease;
+        }
+
+        /* Desktop sidebar toggle arrow */
+        .sidebar-toggle-desktop {
+            display: none;
+            position: fixed;
+            left: 296px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 200;
+            width: 40px;
+            height: 78px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+            color: #fff;
+            cursor: pointer;
+            padding: 0;
+            box-shadow: 0 4px 18px rgba(79, 70, 229, 0.35);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .app.sidebar-collapsed .sidebar-toggle-desktop {
+            left: 4px;
+        }
+
+        .sidebar-toggle-desktop:hover {
+            width: 46px;
+            box-shadow: 0 6px 24px rgba(79, 70, 229, 0.5);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .sidebar-toggle-desktop:active {
+            transform: translateY(-50%) scale(0.96);
+        }
+
+        .sidebar-toggle-desktop i {
+            font-size: 22px;
+            font-weight: bold;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+        }
+
+        .app.sidebar-collapsed .sidebar-toggle-desktop i {
+            transform: rotate(180deg);
+        }
+
+        @media (min-width: 769px) {
+            .sidebar-toggle-desktop {
+                display: grid;
+                place-items: center;
+            }
         }
 
         .header {
@@ -920,6 +999,11 @@
             cursor: pointer;
             padding: 4px;
             margin-right: 12px;
+            transition: color 0.2s ease;
+        }
+
+        .menu-btn:hover {
+            color: var(--primary);
         }
 
         .sidebar-overlay {
@@ -938,11 +1022,25 @@
             opacity: 1;
         }
 
+        /* Tablet breakpoint */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .app {
+                grid-template-columns: 260px 1fr;
+                gap: 14px;
+                padding: 14px;
+            }
+
+            .message-container {
+                max-width: min(780px, 88%);
+            }
+        }
+
+        /* Mobile breakpoint */
         @media (max-width: 768px) {
             .app {
                 display: block;
                 height: 100vh;
-                padding: 10px;
+                padding: 0;
             }
 
             .sidebar {
@@ -950,14 +1048,16 @@
                 top: 0;
                 left: 0;
                 bottom: 0;
-                width: 280px;
+                width: 300px;
+                max-width: 85vw;
                 max-height: none;
                 z-index: 100;
-                border-radius: 0;
+                border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
                 transform: translateX(-100%);
-                transition: transform 0.3s ease;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 margin: 0;
                 border-right: 1px solid var(--border);
+                box-shadow: 8px 0 30px rgba(15, 23, 42, 0.12);
             }
 
             .sidebar.open {
@@ -968,8 +1068,19 @@
                 display: block;
             }
 
+            .sidebar-toggle-desktop {
+                display: none !important;
+            }
+
+            .chat-container {
+                height: 100vh;
+                border-radius: 0;
+                border: none;
+                margin: 0;
+            }
+
             .header {
-                padding: 14px;
+                padding: 12px 14px;
                 flex-wrap: wrap;
             }
 
@@ -983,22 +1094,39 @@
                 min-width: 0;
             }
 
-            .chat-container {
-                height: calc(100vh - 20px);
-                margin: 0;
+            .chat-name {
+                font-size: 16px;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: flex-start;
+                gap: 8px;
+                margin-top: 6px;
+            }
+
+            .header-pill,
+            .selected-model-chip {
+                font-size: 11px;
+                padding: 6px 10px;
             }
 
             .messages {
-                padding: 14px;
+                padding: 12px;
+            }
+
+            .message-container {
+                max-width: 92%;
             }
 
             .composer {
-                padding: 12px;
+                padding: 10px 12px 12px;
             }
 
             .composer-row {
                 flex-direction: column;
                 align-items: stretch;
+                gap: 8px;
             }
 
             .composer-actions {
@@ -1007,10 +1135,53 @@
 
             .send {
                 width: 100%;
+                height: 46px;
+                border-radius: 16px;
+                font-size: 15px;
+            }
+
+            .tool-btn {
+                width: 46px;
+                height: 46px;
             }
 
             .message {
                 max-width: 100%;
+            }
+
+            .code-block {
+                border-radius: 12px;
+            }
+
+            pre {
+                padding: 10px;
+            }
+
+            code.code-content {
+                font-size: 11px;
+            }
+
+            .empty-state h2 {
+                font-size: 20px;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 400px) {
+            .header-right {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .composer-actions {
+                gap: 6px;
+            }
+
+            .think-toggle {
+                min-width: 76px;
+                font-size: 11px;
+                height: 40px;
             }
         }
     </style>
@@ -1036,7 +1207,7 @@
                     <div class="model-label-row">
                         <div class="model-label">Running models</div>
                         <button class="discover-btn" id="discoverBtn" onclick="discoverModels()"><i
-                                class="ri-refresh-line"></i> Scan Network</button>
+                                class="ri-refresh-line"></i> Refresh</button>
                     </div>
                     <div class="model-row">
                         <select class="model-select" id="modelSelect" aria-label="Model selector"
@@ -1045,15 +1216,7 @@
                                 class="ri-loop-left-line"></i></button>
                     </div>
                     <div class="model-count" id="modelCount">Loading models...</div>
-                    <div class="endpoint-chip">
-                        <span>API</span>
-                        <input type="text" id="apiBaseInput" value="" placeholder="auto-detect"
-                            style="flex:1;min-width:0;border:none;background:transparent;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:10px;color:var(--text);outline:none;padding:0;"
-                            onchange="manualSetBaseUrl(this.value)" />
-                        <button class="discover-btn" onclick="clearAndRescan()" title="Clear saved URL and rescan"
-                            style="font-size:10px;white-space:nowrap;"><i class="ri-delete-back-2-line"></i>
-                            Reset</button>
-                    </div>
+                    <div class="endpoint-chip"><span>API</span><code id="apiBaseText">Detecting…</code></div>
                 </div>
             </div>
 
@@ -1062,7 +1225,13 @@
             </div>
         </aside>
 
+        <!-- Desktop sidebar toggle arrow (outside chat-container to avoid scroll issues) -->
+        <button class="sidebar-toggle-desktop" id="desktopToggle" onclick="toggleDesktopSidebar()" title="Toggle sidebar">
+            <i class="ri-arrow-left-s-line"></i>
+        </button>
+
         <main class="chat-container">
+
             <div class="header">
                 <div class="header-left">
                     <button class="menu-btn" onclick="toggleSidebar()"><i class="ri-menu-line"></i></button>
@@ -1105,14 +1274,38 @@
     </div>
 
     <script>
+        /* ╔═══════════════════════════════════════════════════════════╗
+         * ║          SETUP GUIDE — WHAT TO CHANGE PER DEVICE         ║
+         * ╠═══════════════════════════════════════════════════════════╣
+         * ║                                                           ║
+         * ║  ✅ MUST CHANGE:                                          ║
+         * ║  1. LMSTUDIO_API_KEY — Each LM Studio instance has its    ║
+         * ║     own API key. Go to LM Studio → Developer tab →        ║
+         * ║     copy the API key and paste it below.                   ║
+         * ║                                                           ║
+         * ║  🔄 AUTO-DETECTED (no change needed):                     ║
+         * ║  - The IP address (e.g. 192.168.1.2, .4, .8, etc.)       ║
+         * ║    is auto-scanned on the subnet. No manual URL needed.   ║
+         * ║  - The loaded model is auto-discovered.                   ║
+         * ║                                                           ║
+         * ║  ⚙️ OPTIONAL (only if your network is different):         ║
+         * ║  - SCAN_SUBNET — Change if your WiFi uses a different     ║
+         * ║    subnet (e.g. "192.168.0" or "10.0.0")                  ║
+         * ║  - SCAN_PORT — Change if LM Studio runs on a different    ║
+         * ║    port (default is 1234)                                  ║
+         * ║                                                           ║
+         * ╚═══════════════════════════════════════════════════════════╝ */
+
         /* ───────────────────────────────────────────────────────
          *  CONFIG
          * ─────────────────────────────────────────────────────── */
         const CHAT_ENDPOINTS = ["/v1/chat/completions", "/api/v0/chat/completions"];
         const MODEL_LIST_ENDPOINT = "/api/v0/models";
 
-        /* Paste your LM Studio API key here */
-        const LMSTUDIO_API_KEY = "sk-lm-p52j6ymp:054qXhNnJ2LvBlDwZ4iT";
+        /* ⬇️⬇️⬇️ CHANGE THIS FOR EACH DEVICE — paste your LM Studio API key here ⬇️⬇️⬇️ */
+        const LMSTUDIO_API_KEY = "sk-lm-yfmMehka:i7rHDXZVo7orXbNhOyKt";
+        /* ⬆️⬆️⬆️ Get this from: LM Studio → Developer tab → API Key ⬆️⬆️⬆️ */
+
         const REQUIRE_API_KEY = true;
         const ALLOWED_LOCALHOSTS = new Set(["localhost", "127.0.0.1", "::1"]);
         const ALLOW_PRIVATE_NETWORK = true;
@@ -1123,11 +1316,14 @@
          *  IP BRUTE-FORCE SCANNING CONFIG
          *  Scans 192.168.1.1 through 192.168.1.254 on port 1234
          *  to auto-discover LM Studio instances
+         *
+         *  ⚙️ OPTIONAL: Change these ONLY if your network setup
+         *  is different from the default 192.168.1.x:1234
          * ─────────────────────────────────────────────────────── */
-        const SCAN_SUBNET = "192.168.1";
-        const SCAN_PORT = 1234;
-        const SCAN_TIMEOUT_MS = 1500; // timeout per IP probe
-        const SCAN_BATCH_SIZE = 20;   // how many IPs to probe in parallel
+        const SCAN_SUBNET = "192.168.1";  // Change if your WiFi uses a different subnet (e.g. "192.168.0", "10.0.0")
+        const SCAN_PORT = 1234;            // Change if LM Studio uses a different port
+        const SCAN_TIMEOUT_MS = 1500;      // timeout per IP probe (increase if network is slow)
+        const SCAN_BATCH_SIZE = 20;        // how many IPs to probe in parallel
 
         /* ───────────────────────────────────────────────────────
          *  STATE
@@ -1523,8 +1719,7 @@
         function updateHeader() {
             const chat = currentChatIndex !== null ? chats[currentChatIndex] : null;
             document.getElementById("selectedModelChip").innerText = selectedModel || "No model selected";
-            const apiInput = document.getElementById("apiBaseInput");
-            if (apiInput && !apiInput.matches(":focus")) apiInput.value = currentBaseUrl || "";
+            document.getElementById("apiBaseText").innerText = currentBaseUrl;
 
             if (!chat) {
                 document.getElementById("chatName").innerText = "No chat selected";
@@ -1986,9 +2181,7 @@
 
         /**
          * Probe a single IP:port for loaded models.
-         * Step 1: Check if models are loaded
-         * Step 2: Verify the API key works by sending a test chat completion
-         * Returns { base, models[], verified } or null if unreachable/no models.
+         * Returns { base, models[] } or null if unreachable/no models.
          */
         async function probeHost(ip) {
             const base = `http://${ip}:${SCAN_PORT}`;
@@ -2001,119 +2194,78 @@
                     cache: "no-store"
                 }, SCAN_TIMEOUT_MS);
                 const loaded = normalizeLoadedModels(payload);
-                if (!loaded.length) return null;
-
-                // Verify API key actually works by sending a tiny test request
-                let verified = false;
-                try {
-                    for (const endpoint of CHAT_ENDPOINTS) {
-                        try {
-                            const testRes = await fetch(`${base}${endpoint}`, {
-                                method: "POST",
-                                headers: getAuthHeaders(),
-                                credentials: "omit",
-                                cache: "no-store",
-                                body: JSON.stringify({
-                                    model: loaded[0],
-                                    messages: [{ role: "user", content: "hi" }],
-                                    max_tokens: 1,
-                                    stream: false
-                                }),
-                                signal: AbortSignal.timeout(SCAN_TIMEOUT_MS)
-                            });
-                            if (testRes.ok) {
-                                verified = true;
-                                // Abort reading the body — we only needed the status
-                                testRes.body?.cancel?.();
-                                break;
-                            }
-                        } catch (_) { }
-                    }
-                } catch (_) { }
-
-                return { base, models: loaded, verified };
+                if (loaded.length) {
+                    return { base, models: loaded };
+                }
             } catch (_e) {
-                return null;
+                // Unreachable or error — skip
             }
-        }
-
-        /**
-         * Manually set the base URL from the UI input.
-         */
-        function manualSetBaseUrl(value) {
-            const cleaned = normalizeBaseUrl(value);
-            if (!cleaned) return;
-            if (!isSafeApiBase(cleaned)) {
-                setStatus("Invalid or unsafe URL");
-                return;
-            }
-            currentBaseUrl = cleaned;
-            saveBaseUrl();
-            updateHeader();
-            setStatus(`Endpoint set to ${cleaned}`);
-            // Re-discover models at the new URL
-            discoverModels();
-        }
-
-        /**
-         * Clear saved URL from localStorage and rescan the network.
-         */
-        function clearAndRescan() {
-            localStorage.removeItem("lmstudio_base_url");
-            currentBaseUrl = "";
-            document.getElementById("apiBaseInput").value = "";
-            setStatus("Cleared saved URL — rescanning...");
-            discoverModels();
+            return null;
         }
 
         /**
          * Brute-force scan the subnet to find LM Studio.
-         * Validates API key authentication at each host.
-         * Scans ALL hosts, prefers the one where API key is verified.
+         * Tries IPs in batches for efficiency.
          */
         async function bruteForceDiscoverModels() {
             const discoverBtn = document.getElementById("discoverBtn");
             const modelCount = document.getElementById("modelCount");
-            const apiBaseInput = document.getElementById("apiBaseInput");
             discoverBtn.disabled = true;
             modelCount.innerText = "🔍 Scanning network for LM Studio...";
 
-            // If user manually set a URL, try ONLY that URL first
-            const manualUrl = normalizeBaseUrl(apiBaseInput?.value || "");
-            if (manualUrl && isSafeApiBase(manualUrl)) {
-                modelCount.innerText = `🔍 Trying ${manualUrl}...`;
+            // First, try the currently saved base URL (fast path)
+            const savedBase = normalizeBaseUrl(localStorage.getItem("lmstudio_base_url") || "");
+            if (savedBase && isSafeApiBase(savedBase)) {
                 try {
-                    const url = new URL(manualUrl);
-                    const result = await probeHost(url.hostname);
-                    if (result && result.verified) {
-                        currentBaseUrl = result.base;
+                    const payload = await fetchJsonWithTimeout(`${savedBase}${MODEL_LIST_ENDPOINT}`, {
+                        method: "GET",
+                        headers: getAuthHeaders(),
+                        credentials: "omit",
+                        cache: "no-store"
+                    }, 3000);
+                    const loaded = normalizeLoadedModels(payload);
+                    if (loaded.length) {
+                        currentBaseUrl = savedBase;
                         saveBaseUrl();
-                        models = result.models;
+                        models = loaded;
                         if (!models.includes(selectedModel)) selectedModel = models[0] || "";
                         saveModelSelection();
                         renderModelSelect();
                         updateHeader();
-                        apiBaseInput.value = result.base;
-                        modelCount.innerText = `✅ ${models.length} model${models.length === 1 ? '' : 's'} (API key verified) at ${result.base}`;
+                        modelCount.innerText = `${models.length} running model${models.length === 1 ? '' : 's'} found at ${savedBase}`;
                         discoverBtn.disabled = false;
                         return;
-                    } else if (result && result.models.length) {
-                        // Models found but API key not verified
-                        modelCount.innerText = `⚠️ Models found at ${manualUrl} but API key rejected — scanning further...`;
                     }
                 } catch (_e) { }
             }
 
-            // Collect ALL hosts with models
-            const allHosts = [];
+            // Also try localhost
+            try {
+                const localhostBase = "http://127.0.0.1:1234";
+                const payload = await fetchJsonWithTimeout(`${localhostBase}${MODEL_LIST_ENDPOINT}`, {
+                    method: "GET",
+                    headers: getAuthHeaders(),
+                    credentials: "omit",
+                    cache: "no-store"
+                }, 2000);
+                const loaded = normalizeLoadedModels(payload);
+                if (loaded.length) {
+                    currentBaseUrl = localhostBase;
+                    saveBaseUrl();
+                    models = loaded;
+                    if (!models.includes(selectedModel)) selectedModel = models[0] || "";
+                    saveModelSelection();
+                    renderModelSelect();
+                    updateHeader();
+                    modelCount.innerText = `${models.length} running model${models.length === 1 ? '' : 's'} found at ${localhostBase}`;
+                    discoverBtn.disabled = false;
+                    return;
+                }
+            } catch (_e) { }
 
-            // Try localhost first
-            modelCount.innerText = "🔍 Checking localhost...";
-            const localhostResult = await probeHost("127.0.0.1");
-            if (localhostResult) allHosts.push(localhostResult);
-
-            // Brute-force scan entire subnet
-            for (let batchStart = 1; batchStart <= 254; batchStart += SCAN_BATCH_SIZE) {
+            // Brute-force scan: try all IPs in the subnet
+            let foundResult = null;
+            for (let batchStart = 1; batchStart <= 254 && !foundResult; batchStart += SCAN_BATCH_SIZE) {
                 const batchEnd = Math.min(batchStart + SCAN_BATCH_SIZE - 1, 254);
                 modelCount.innerText = `🔍 Scanning ${SCAN_SUBNET}.${batchStart}-${batchEnd}...`;
 
@@ -2125,38 +2277,27 @@
                 const results = await Promise.all(probes);
                 for (const r of results) {
                     if (r && r.models.length) {
-                        allHosts.push(r);
+                        foundResult = r;
+                        break;
                     }
                 }
-
-                // If we found a verified host, we can stop scanning early
-                if (allHosts.some(h => h.verified)) break;
             }
 
-            // Prefer verified hosts (where API key works), then fall back to any host with models
-            const verified = allHosts.filter(h => h.verified);
-            const chosen = verified.length ? verified[0] : (allHosts.length ? allHosts[0] : null);
-
-            if (chosen) {
-                currentBaseUrl = chosen.base;
+            if (foundResult) {
+                currentBaseUrl = foundResult.base;
                 saveBaseUrl();
-                models = chosen.models;
+                models = foundResult.models;
                 if (!models.includes(selectedModel)) selectedModel = models[0] || "";
                 saveModelSelection();
                 renderModelSelect();
                 updateHeader();
-                apiBaseInput.value = chosen.base;
-
-                const verifiedLabel = chosen.verified ? "✅ API key verified" : "⚠️ API key not verified";
-                const extraHosts = allHosts.length > 1 ? ` (${allHosts.length} hosts found)` : "";
-                modelCount.innerText = `${models.length} model${models.length === 1 ? '' : 's'} — ${verifiedLabel} at ${chosen.base}${extraHosts}`;
+                modelCount.innerText = `${models.length} running model${models.length === 1 ? '' : 's'} found at ${foundResult.base}`;
             } else {
                 models = [];
                 selectedModel = "";
                 saveModelSelection();
                 renderModelSelect();
                 updateHeader();
-                apiBaseInput.value = "";
                 modelCount.innerText = "No running models found on network";
             }
 
@@ -2590,12 +2731,19 @@
             renderChatList();
             updateHeader();
             showEmptyState();
+
+            // Restore desktop sidebar collapsed state
+            if (localStorage.getItem("sidebar_collapsed") === "true") {
+                document.querySelector(".app").classList.add("sidebar-collapsed");
+            }
+
             await discoverModels();
             renderModelSelect();
             updateHeader();
             syncThinkingAvailability();
         }
 
+        /* Mobile sidebar toggle (slide-out overlay) */
         function toggleSidebar() {
             const sidebar = document.getElementById("sidebar");
             const overlay = document.getElementById("sidebarOverlay");
@@ -2607,6 +2755,14 @@
                 overlay.style.opacity = "0";
                 setTimeout(() => overlay.style.display = "none", 300);
             }
+        }
+
+        /* Desktop sidebar collapse/expand toggle */
+        function toggleDesktopSidebar() {
+            const app = document.querySelector(".app");
+            app.classList.toggle("sidebar-collapsed");
+            const isCollapsed = app.classList.contains("sidebar-collapsed");
+            localStorage.setItem("sidebar_collapsed", isCollapsed ? "true" : "false");
         }
 
         init();
