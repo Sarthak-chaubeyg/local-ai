@@ -1184,6 +1184,424 @@
                 height: 40px;
             }
         }
+
+        /* ═══════════════════════════════════════════════════════
+         *  MODEL MANAGER MODAL
+         * ═══════════════════════════════════════════════════════ */
+        .manage-models-btn {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 9px 12px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f0f4ff, #e8ecfa);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 12px;
+            border: 1px solid rgba(79, 70, 229, 0.15);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+        }
+
+        .manage-models-btn:hover {
+            background: linear-gradient(135deg, #e4e9ff, #dce1f8);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.12);
+        }
+
+        .manage-models-btn i {
+            font-size: 15px;
+        }
+
+        /* Modal overlay */
+        .model-manager-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(8px);
+            z-index: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .model-manager-overlay.visible {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        /* Modal container */
+        .model-manager-modal {
+            width: 94%;
+            max-width: 640px;
+            max-height: 85vh;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(24px);
+            border-radius: 24px;
+            border: 1px solid rgba(216, 226, 240, 0.8);
+            box-shadow: 0 32px 80px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px) scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .mm-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 20px 22px 16px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(248, 250, 255, 0.9));
+        }
+
+        .mm-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mm-header-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+            color: #fff;
+            font-size: 18px;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+        }
+
+        .mm-header h3 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .mm-header p {
+            margin: 2px 0 0;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .mm-close-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            display: grid;
+            place-items: center;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.16s ease;
+            font-size: 18px;
+        }
+
+        .mm-close-btn:hover {
+            background: #e2e8f0;
+            color: var(--text);
+            transform: scale(1.05);
+        }
+
+        .mm-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 18px 20px;
+        }
+
+        .mm-loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .mm-loading i {
+            font-size: 24px;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 12px;
+            animation: mmSpin 1.2s linear infinite;
+        }
+
+        @keyframes mmSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .mm-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .mm-empty i {
+            font-size: 32px;
+            color: #cbd5e1;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        /* Model card */
+        .mm-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+            transition: all 0.2s ease;
+        }
+
+        .mm-card:hover {
+            border-color: rgba(79, 70, 229, 0.2);
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+            transform: translateY(-1px);
+        }
+
+        .mm-card.is-loaded {
+            border-color: rgba(34, 197, 94, 0.3);
+            background: linear-gradient(135deg, rgba(240, 253, 244, 0.5), #fff 60%);
+        }
+
+        .mm-card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 18px;
+            flex: 0 0 auto;
+            background: #f1f5f9;
+            color: var(--muted);
+        }
+
+        .mm-card.is-loaded .mm-card-icon {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #16a34a;
+        }
+
+        .mm-card-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .mm-card-name {
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .mm-card-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .mm-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 10px;
+            padding: 2px 7px;
+            border-radius: 6px;
+            background: #f1f5f9;
+            color: #64748b;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .mm-chip.loaded-badge {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #15803d;
+        }
+
+        .mm-card-actions {
+            flex: 0 0 auto;
+            display: flex;
+            gap: 6px;
+        }
+
+        .mm-load-btn,
+        .mm-unload-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 11px;
+            font-size: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            min-width: 90px;
+        }
+
+        .mm-load-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.2);
+        }
+
+        .mm-load-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
+        }
+
+        .mm-unload-btn {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            color: #dc2626;
+            border: 1px solid rgba(239, 68, 68, 0.15);
+        }
+
+        .mm-unload-btn:hover {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.15);
+        }
+
+        .mm-load-btn:disabled,
+        .mm-unload-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .mm-btn-spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: mmSpin 0.7s linear infinite;
+        }
+
+        .mm-unload-btn .mm-btn-spinner {
+            border-color: rgba(220, 38, 38, 0.2);
+            border-top-color: #dc2626;
+        }
+
+        /* Toast notification */
+        .mm-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            z-index: 600;
+            padding: 12px 22px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            box-shadow: 0 12px 40px rgba(15, 23, 42, 0.2);
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 90vw;
+            text-align: center;
+        }
+
+        .mm-toast.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .mm-toast.success {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+        }
+
+        .mm-toast.error {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+        }
+
+        .mm-toast.info {
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        }
+
+        /* Section divider in the modal */
+        .mm-section-label {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 8px 4px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mm-section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* Mobile responsive for modal */
+        @media (max-width: 768px) {
+            .model-manager-modal {
+                width: 97%;
+                max-height: 90vh;
+                border-radius: 20px;
+            }
+
+            .mm-header {
+                padding: 16px 16px 12px;
+            }
+
+            .mm-body {
+                padding: 12px 14px 16px;
+            }
+
+            .mm-card {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 12px 14px;
+            }
+
+            .mm-card-actions {
+                width: 100%;
+            }
+
+            .mm-load-btn,
+            .mm-unload-btn {
+                flex: 1;
+            }
+        }
     </style>
 </head>
 
@@ -1217,6 +1635,9 @@
                     </div>
                     <div class="model-count" id="modelCount">Loading models...</div>
                     <div class="endpoint-chip"><span>API</span><code id="apiBaseText">Detecting…</code></div>
+                    <button class="manage-models-btn" onclick="openModelManager()" id="manageModelsBtn">
+                        <i class="ri-settings-3-line"></i> Manage Models
+                    </button>
                 </div>
             </div>
 
@@ -1272,6 +1693,31 @@
             </div>
         </main>
     </div>
+
+    <!-- Model Manager Modal Overlay -->
+    <div class="model-manager-overlay" id="modelManagerOverlay" onclick="handleModelManagerOverlayClick(event)">
+        <div class="model-manager-modal" id="modelManagerModal">
+            <div class="mm-header">
+                <div class="mm-header-left">
+                    <div class="mm-header-icon"><i class="ri-settings-3-line"></i></div>
+                    <div>
+                        <h3>Model Manager</h3>
+                        <p>Load or unload downloaded models</p>
+                    </div>
+                </div>
+                <button class="mm-close-btn" onclick="closeModelManager()" title="Close"><i class="ri-close-line"></i></button>
+            </div>
+            <div class="mm-body" id="mmBody">
+                <div class="mm-loading">
+                    <i class="ri-loader-4-line"></i>
+                    Loading model list...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="mm-toast" id="mmToast"></div>
 
     <script>
         /* ╔═══════════════════════════════════════════════════════════╗
@@ -2339,6 +2785,320 @@
             saveModelSelection();
             syncThinkingAvailability();
             updateHeader();
+        }
+
+        /* ───────────────────────────────────────────────────────
+         *  MODEL MANAGER — LOAD / UNLOAD
+         * ─────────────────────────────────────────────────────── */
+        const MODEL_LIST_V1_ENDPOINT = "/api/v1/models";
+        const MODEL_LOAD_ENDPOINT = "/api/v1/models/load";
+        const MODEL_UNLOAD_ENDPOINT = "/api/v1/models/unload";
+
+        let allDownloadedModels = [];
+        let mmBusy = new Set(); // model keys currently in load/unload operation
+
+        function formatFileSize(bytes) {
+            if (!bytes || bytes <= 0) return "—";
+            if (bytes < 1024) return bytes + " B";
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+            if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+            return (bytes / (1024 * 1024 * 1024)).toFixed(1) + " GB";
+        }
+
+        let _toastTimer = null;
+        function showToast(message, type = "info", durationMs = 3500) {
+            const toast = document.getElementById("mmToast");
+            if (!toast) return;
+            toast.textContent = message;
+            toast.className = `mm-toast ${type}`;
+            if (_toastTimer) clearTimeout(_toastTimer);
+            // Force re-trigger animation
+            void toast.offsetWidth;
+            toast.classList.add("visible");
+            _toastTimer = setTimeout(() => {
+                toast.classList.remove("visible");
+            }, durationMs);
+        }
+
+        /**
+         * Fetch all downloaded models from LM Studio v1 API.
+         * Returns array of model objects with load status.
+         */
+        async function fetchAllDownloadedModels() {
+            const url = `${currentBaseUrl}${MODEL_LIST_V1_ENDPOINT}`;
+            try {
+                const data = await fetchJsonWithTimeout(url, {
+                    method: "GET",
+                    headers: getAuthHeaders(),
+                    credentials: "omit",
+                    cache: "no-store"
+                }, 8000);
+
+                // The v1 API returns { models: [...] }
+                const modelList = Array.isArray(data?.models) ? data.models : [];
+                // Filter to LLM and VLM types only (not embedding models)
+                return modelList.filter(m => {
+                    const t = String(m?.type || "").toLowerCase();
+                    return t === "llm" || t === "vlm";
+                });
+            } catch (err) {
+                console.error("Failed to fetch all models:", err);
+                return [];
+            }
+        }
+
+        /**
+         * Load a model via LM Studio REST API.
+         * POST /api/v1/models/load { model: modelKey }
+         */
+        async function loadModelApi(modelKey) {
+            const url = `${currentBaseUrl}${MODEL_LOAD_ENDPOINT}`;
+            const response = await fetch(url, {
+                method: "POST",
+                headers: getAuthHeaders(),
+                credentials: "omit",
+                body: JSON.stringify({
+                    model: modelKey,
+                    echo_load_config: true
+                })
+            });
+            if (!response.ok) {
+                const text = await response.text().catch(() => "");
+                throw new Error(`Load failed: HTTP ${response.status}${text ? ` — ${text.slice(0, 200)}` : ""}`);
+            }
+            return await response.json();
+        }
+
+        /**
+         * Unload a model via LM Studio REST API.
+         * POST /api/v1/models/unload { instance_id: instanceId }
+         */
+        async function unloadModelApi(instanceId) {
+            const url = `${currentBaseUrl}${MODEL_UNLOAD_ENDPOINT}`;
+            const response = await fetch(url, {
+                method: "POST",
+                headers: getAuthHeaders(),
+                credentials: "omit",
+                body: JSON.stringify({
+                    instance_id: instanceId
+                })
+            });
+            if (!response.ok) {
+                const text = await response.text().catch(() => "");
+                throw new Error(`Unload failed: HTTP ${response.status}${text ? ` — ${text.slice(0, 200)}` : ""}`);
+            }
+            return await response.json();
+        }
+
+        /**
+         * Handle load button click for a model.
+         */
+        async function handleLoadModel(modelKey) {
+            if (mmBusy.has(modelKey)) return;
+            mmBusy.add(modelKey);
+            renderModelManagerCards();
+
+            try {
+                const result = await loadModelApi(modelKey);
+                showToast(`✅ Loaded ${modelKey} in ${(result.load_time_seconds || 0).toFixed(1)}s`, "success");
+
+                // Refresh both lists
+                await refreshAfterModelChange();
+            } catch (err) {
+                console.error("Load error:", err);
+                showToast(`❌ Failed to load: ${err.message}`, "error", 5000);
+            } finally {
+                mmBusy.delete(modelKey);
+                renderModelManagerCards();
+            }
+        }
+
+        /**
+         * Handle unload button click for a model.
+         */
+        async function handleUnloadModel(modelKey, instanceId) {
+            if (mmBusy.has(modelKey)) return;
+            mmBusy.add(modelKey);
+            renderModelManagerCards();
+
+            try {
+                await unloadModelApi(instanceId);
+                showToast(`✅ Unloaded ${modelKey}`, "success");
+
+                // Refresh both lists
+                await refreshAfterModelChange();
+            } catch (err) {
+                console.error("Unload error:", err);
+                showToast(`❌ Failed to unload: ${err.message}`, "error", 5000);
+            } finally {
+                mmBusy.delete(modelKey);
+                renderModelManagerCards();
+            }
+        }
+
+        /**
+         * After a load/unload, refresh the model manager list AND the running models dropdown.
+         */
+        async function refreshAfterModelChange() {
+            // Re-fetch all models for the manager
+            allDownloadedModels = await fetchAllDownloadedModels();
+            renderModelManagerCards();
+
+            // Also refresh the running models dropdown
+            const loaded = allDownloadedModels
+                .filter(m => m.loaded_instances && m.loaded_instances.length > 0)
+                .map(m => String(m.key || m.id || "").trim())
+                .filter(Boolean);
+
+            models = loaded;
+            if (!models.includes(selectedModel)) {
+                selectedModel = models[0] || "";
+            }
+            saveModelSelection();
+            renderModelSelect();
+            updateHeader();
+            syncThinkingAvailability();
+
+            const modelCount = document.getElementById("modelCount");
+            if (modelCount) {
+                modelCount.innerText = models.length
+                    ? `${models.length} running model${models.length === 1 ? '' : 's'} found`
+                    : "No running models found";
+            }
+        }
+
+        /**
+         * Render the model cards inside the modal body.
+         */
+        function renderModelManagerCards() {
+            const body = document.getElementById("mmBody");
+            if (!body) return;
+
+            if (!allDownloadedModels.length) {
+                body.innerHTML = `
+                    <div class="mm-empty">
+                        <i class="ri-inbox-2-line"></i>
+                        No downloaded models found.<br>
+                        <span style="font-size:12px;color:#94a3b8;">Make sure LM Studio is running and the API server is started.</span>
+                    </div>`;
+                return;
+            }
+
+            // Sort: loaded first, then alphabetically
+            const sorted = [...allDownloadedModels].sort((a, b) => {
+                const aLoaded = (a.loaded_instances?.length || 0) > 0 ? 0 : 1;
+                const bLoaded = (b.loaded_instances?.length || 0) > 0 ? 0 : 1;
+                if (aLoaded !== bLoaded) return aLoaded - bLoaded;
+                return (a.display_name || a.key || "").localeCompare(b.display_name || b.key || "");
+            });
+
+            const loadedModels = sorted.filter(m => m.loaded_instances?.length > 0);
+            const unloadedModels = sorted.filter(m => !m.loaded_instances?.length);
+
+            let html = "";
+
+            if (loadedModels.length) {
+                html += `<div class="mm-section-label">Loaded (${loadedModels.length})</div>`;
+                loadedModels.forEach(m => { html += buildModelCard(m); });
+            }
+
+            if (unloadedModels.length) {
+                html += `<div class="mm-section-label">Available (${unloadedModels.length})</div>`;
+                unloadedModels.forEach(m => { html += buildModelCard(m); });
+            }
+
+            body.innerHTML = html;
+        }
+
+        /**
+         * Build HTML for a single model card.
+         */
+        function buildModelCard(model) {
+            const key = model.key || model.id || "";
+            const name = model.display_name || key;
+            const publisher = model.publisher || "";
+            const size = formatFileSize(model.size_bytes);
+            const quant = model.quantization?.name || "";
+            const params = model.params_string || "";
+            const format = model.format || "";
+            const isLoaded = model.loaded_instances && model.loaded_instances.length > 0;
+            const instanceId = isLoaded ? (model.loaded_instances[0].id || key) : "";
+            const isBusy = mmBusy.has(key);
+
+            const escapedKey = escapeAttr(key);
+            const escapedInstanceId = escapeAttr(instanceId);
+
+            let actionHtml = "";
+            if (isBusy) {
+                actionHtml = isLoaded
+                    ? `<button class="mm-unload-btn" disabled><span class="mm-btn-spinner"></span> Unloading…</button>`
+                    : `<button class="mm-load-btn" disabled><span class="mm-btn-spinner"></span> Loading…</button>`;
+            } else if (isLoaded) {
+                actionHtml = `<button class="mm-unload-btn" onclick="handleUnloadModel('${escapedKey}', '${escapedInstanceId}')"><i class="ri-eject-line"></i> Unload</button>`;
+            } else {
+                actionHtml = `<button class="mm-load-btn" onclick="handleLoadModel('${escapedKey}')"><i class="ri-play-circle-line"></i> Load</button>`;
+            }
+
+            const metaChips = [];
+            if (publisher) metaChips.push(`<span class="mm-chip">${escapeHtml(publisher)}</span>`);
+            if (params) metaChips.push(`<span class="mm-chip">${escapeHtml(params)}</span>`);
+            if (quant) metaChips.push(`<span class="mm-chip">${escapeHtml(quant)}</span>`);
+            if (size !== "—") metaChips.push(`<span class="mm-chip">${size}</span>`);
+            if (format) metaChips.push(`<span class="mm-chip">${escapeHtml(format.toUpperCase())}</span>`);
+            if (isLoaded) metaChips.push(`<span class="mm-chip loaded-badge">● Loaded</span>`);
+
+            return `
+                <div class="mm-card${isLoaded ? ' is-loaded' : ''}">
+                    <div class="mm-card-icon">
+                        <i class="${isLoaded ? 'ri-checkbox-circle-fill' : 'ri-cpu-line'}"></i>
+                    </div>
+                    <div class="mm-card-info">
+                        <div class="mm-card-name" title="${escapeHtml(key)}">${escapeHtml(name)}</div>
+                        <div class="mm-card-meta">${metaChips.join("")}</div>
+                    </div>
+                    <div class="mm-card-actions">
+                        ${actionHtml}
+                    </div>
+                </div>`;
+        }
+
+        /**
+         * Open the model manager modal.
+         */
+        async function openModelManager() {
+            const overlay = document.getElementById("modelManagerOverlay");
+            const body = document.getElementById("mmBody");
+            overlay.style.display = "flex";
+            // Force reflow for animation
+            void overlay.offsetWidth;
+            overlay.classList.add("visible");
+
+            // Show loading state
+            body.innerHTML = `<div class="mm-loading"><i class="ri-loader-4-line"></i>Loading model list...</div>`;
+
+            // Fetch models
+            allDownloadedModels = await fetchAllDownloadedModels();
+            renderModelManagerCards();
+        }
+
+        /**
+         * Close the model manager modal.
+         */
+        function closeModelManager() {
+            const overlay = document.getElementById("modelManagerOverlay");
+            overlay.classList.remove("visible");
+            setTimeout(() => {
+                overlay.style.display = "none";
+            }, 300);
+        }
+
+        /**
+         * Close modal when clicking on the overlay backdrop (not the modal itself).
+         */
+        function handleModelManagerOverlayClick(event) {
+            if (event.target === document.getElementById("modelManagerOverlay")) {
+                closeModelManager();
+            }
         }
 
         /* ───────────────────────────────────────────────────────
