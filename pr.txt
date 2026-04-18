@@ -1,0 +1,211 @@
+You are an excellent Ai and Web developer who complete any type of task in a go without giving any error because you also revaluate and audit the code yourself too. Frontend Page: I want you to create a Get Ai News website with top notch 3d styling using lenis and in background their is a 3d geometry running, in the center of the page their is an input box asking for email where user types his email address to get the ai news, for e.g voltavinaycadila751@gmail.com however this is an example in input place holder use example@email.com. Now the main part the backend. First of all i am telling you that this code will be pushed on a GitHub repository by you but only when i say to do it or approve so also make it GitHub working ready without any issues because after pushing it you will give me that link of git repo and then i will go to netlify to host it, after that i will also index this page on google using search console of google, so here are some strict rule of this website.
+
+1. Make this website highly search engine optimized or SEO optimized because whenever user types Ai news letter or "X mail ai" (which would be the site name because it is unique and has higher chance to get top ranked on google search results, also you can change the name to if you think you have a better name and that can get 1st rank on search results just make sure that if user type that name then the site comes at number 1.)
+
+2. Make the site super secure, use as much security additions in the website that helps the ui to stay strong and as we are deploying it on netlify too using GitHub add _headers too so it robust the security from some kinds off attacks and gets me a A+ on security headers website. But this is 1 thing i told you, you have to also encrypt and secure all the other stuff too. 
+
+3. I want you to add a input too where if the user wants that he wants a different topic to be searched on then he can just type the input or if the user directly hits the arrow button which is send at here then by default the ai will get this prompt and that is why it's name primarily as Ai news letter. 
+
+PROMPT:[Act as a highly intelligent personalized news curator, interest profiler, and internet researcher.
+
+Your job is to understand my interests deeply, search the internet for the most relevant updates, and then return only the news that matches my personal preferences as closely as possible.
+
+You should not give generic trending news. You should not give broad world news unless it connects strongly to my interests. Your goal is to act like a news filter tailored for me.
+
+MY INTEREST PROFILE
+
+1. Primary interest: AI news
+I am most interested in:
+- New AI model launches
+- Flagship models, whether open-source or closed-source
+- Which model is better than GPT, Gemini, Claude, or other leading models
+- Free access to premium AI tools
+- High or unlimited rate limits
+- Practical usefulness for study and coding
+- Whether a model can run locally
+- Benchmarks, but only when they help compare real-world capability
+- Hidden or lesser-known AI tools
+- New AI products, platforms, APIs, and model releases
+- Major updates in the AI ecosystem
+
+2. What I care about most in AI news
+When reading AI news, I usually care about this order:
+- Is it free or paid?
+- Is it better than GPT or Gemini?
+- What are the benchmarks?
+- What are the rate limits?
+- Is it open-source or closed-source?
+- Can it run locally?
+- Can it help me study?
+- Can it help me code?
+- Is it actually useful, or just hype?
+
+3. My main reasons for using AI
+My top goals are:
+- Studying
+- Coding
+
+So whenever possible, connect AI news to:
+- learning support
+- question generation
+- explanation quality
+- code generation
+- debugging
+- productivity
+- document understanding
+- PDF reading
+- local usage
+- real-world workflows
+
+4. My content preference in AI
+I prefer content in this order:
+- A clear explanation of one useful tool or model
+- Hidden/free tools that most people do not know
+- Short updates about major launches
+- Direct comparisons only when useful
+
+My ideal format is:
+- Start with the most important point
+- Explain why it matters
+- Tell me whether it is free or paid
+- Tell me whether it is good for studying and coding
+- Tell me if it is better than major competitors
+- Tell me whether it is open-source or closed-source
+- Tell me whether it can run locally
+- Tell me about practical use cases
+- Then mention limitations
+
+5. Things I do NOT want
+Do not waste my time with:
+- Clickbait headlines without substance
+- Overly technical jargon without explanation
+- Irrelevant global news
+- Empty hype
+- Generic AI news with no practical value
+- Low-signal content that sounds impressive but is not useful
+- Long theory with no real application
+
+6. My preferred news style
+I like news that:
+- Starts with the most important fact
+- Is easy to understand
+- Is useful immediately
+- Feels intelligent but not overly technical
+- Gives me the core update first and then details
+- Balances depth with readability
+- Focuses on value, not noise
+
+7. My thinking style
+I am not just looking for what is popular. I want:
+- what is best right now
+- what is most useful
+- what can give me an advantage
+- what is worth trying
+- what has strong real-world value
+
+I care about usefulness more than hype.
+
+YOUR TASK
+
+Using my interest profile above, search the internet and build a personalized news feed for me.
+
+Only include news that matches one or more of these categories:
+- AI model launches
+- AI tool releases
+- free AI access
+- high-limit AI tools
+- open-source AI models
+- closed-source flagship AI model updates
+- benchmark comparisons
+- AI tools for studying
+- AI tools for coding
+- local AI model support
+- hidden or underrated AI tools
+- major AI research or product updates that matter to everyday users
+
+When presenting each item, explain:
+- why it is relevant to me
+- whether it is free or paid
+- whether it is open-source or closed-source
+- whether it can help with study and/or coding
+- whether it is better than major competing models or tools
+- whether it is worth my attention right now
+
+OUTPUT FORMAT
+
+Give the final result in this structure:
+
+1. PERSONALIZED NEWS SUMMARY
+A short summary of what kind of news I seem to care about most.
+
+2. TOP NEWS MATCHES FOR ME
+List the most relevant news items first.
+For each item include:
+- Title
+- Category
+- Why it matches my interests
+- Free or paid
+- Open-source or closed-source
+- Usefulness for studying
+- Usefulness for coding
+- Local run support if relevant
+- Benchmark or competitive relevance if relevant
+- Final verdict: must-read, worth checking, or skip
+
+3. MY NEWS PREFERENCE PROFILE
+Infer and explain my interests in detail:
+- primary interests
+- secondary interests
+- content style preference
+- depth preference
+- what I ignore
+- what keeps my attention
+- what kind of news feed suits me best
+
+4. RECOMMENDED DAILY FEED STRUCTURE
+Create a feed layout for me such as:
+- AI launches
+- best free AI tools
+- model comparisons
+- study tools
+- coding tools
+- open-source updates
+- local AI updates
+
+5. MY FAVORITE NEWS RULES
+Based on my behavior, define the rules that explain my interests:
+- I like news that is practical
+- I like current AI competition
+- I like tools that improve study and coding
+- I like updates that are directly useful
+- I like news that helps me save time, learn better, or build better things
+
+QUALITY RULES
+
+- Be specific.
+- Be accurate.
+- Be detailed.
+- Be practical.
+- Avoid filler.
+- Avoid vague summaries.
+- Do not hallucinate.
+- If something is uncertain, say so clearly.
+- Prefer recent and important updates over old or low-value ones.
+- Prioritize relevance over popularity.
+- Explain things in simple language, but with enough depth to be useful.
+
+Now perform the task and give me my personalized news.]
+
+
+
+
+now this prompt will come when arrow btn is clicked two times, first time this prompt is pasted as it is in input box and then second time it is actually sent to the ai model and reads it.
+
+I am using tavily api key because the tavily is best in web research, even better then perplexity so that is why and while writing the code use the advanced deep research where 2 credits is spent rather then 1 which is the cost of basic search. I want that the you to develop retrieval-augmented generation for ai model to drastically reduce AI hallucinations, ensures factual accuracy, and provides access to proprietary or real-time information. The ai model you are using here would be nemotron-3-super-120b-a12b from open router and i will provide the api for this too. This model has a context window of 262.1k token and output also of 262.1k. The ai model will use at least 20 resources per research and for every deep research it uses 80-100 resources too do in depth analysis and while doing deep research you in the code itself will force the ai model to generate more and much bigger reports because you need to utilize the 262.1k output of this model and choosing this model is because it is free and i don't want to spend it on. From the image you can see that at the bottom of input button but inside it you will also include these 2 buttons where 1 is Search and another is Deep Research and search will cost 1 api credit where as deep research would cost 2. 
+
+After the button has pressed then the model starts scraping the sites and then the user can see on the website too that at what stage the model is at? is it searching the sites according to the query asked , Crawling through the sites info, Generating insights and then it says sent to your email address when it is done and sent to the address the user has typed in. Now tell me which email provider will you use to send mail? Gmail? or anyone else just tell me and make sure that provider has very high limit or is unlimited for api usage. 
+
+in the screenshot you can see the type of input with styling i want and that similar kind of styling i want in my website too 
+
+Now the mail part:
+When the user receives the mail, add an amazing styled cover at the top with a heading according to the query and then the mail... it should be minimal, aesthetic and visually appealing so that the user is engaged in reading, also add supports of sub heading, bold characters, tables so that wherever ai model wants to create it, then it can do it easily because it makes it more attractive and engaging. At the bottom of the site the ai mentions all the sites it crawled and used to fetch the information, also make sure that the url are also placed right so the user can go to that website to get more details or extensive knowledge about it. Make the website responsive too, and with top notch security.
