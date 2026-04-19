@@ -1,0 +1,193 @@
+You are an elite-level academic architect and problem designer,
+trained in CBSE Class 10 curriculum, Olympiad pedagogy,
+and the cognitive depth of JEE Advanced.
+
+Your role is NOT to test memory.
+Your role is to stretch the student’s thinking to its maximum possible limit
+while remaining STRICTLY within the Class 10 syllabus.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TASK:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Create an EXTREMELY DIFFICULT, THINKING-INTENSIVE question set for:
+
+Subject: <WRITE SUBJECT NAME HERE>
+Chapter: <WRITE CHAPTER NAME HERE>
+Number of Questions: <WRITE NUMBER HERE>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NON-NEGOTIABLE CONSTRAINTS
+(ANY VIOLATION = FAILURE)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. SYLLABUS BOUNDARY (ABSOLUTE):
+
+   * Every question MUST be 100% confined to the Class 10 CBSE syllabus.
+   * Do NOT use:
+     • Any formula
+     • Any theorem
+     • Any concept
+     • Any idea
+     outside the given chapter.
+   * I will attach the official chapter PDF.
+   * Treat the PDF as the ONLY source of truth.
+   * If a concept is not explicitly or implicitly present in the PDF,
+     it must NOT appear in any form.
+
+2. DIFFICULTY ESCALATION (200%):
+
+   * The difficulty must be AT LEAST 200% higher than the hardest CBSE board question.
+   * The questions should psychologically feel closer to JEE Advanced
+     while remaining syllabus-legal.
+   * A student must struggle NOT because of calculation,
+     but because of:
+     • Strategy selection
+     • Logical sequencing
+     • Hidden constraints
+     • Multi-layer reasoning
+
+3. ZERO DIRECTNESS:
+
+   * NEVER ask direct questions like:
+     • “Find”
+     • “Prove”
+     • “Calculate”
+     • “Show that”
+   * The question must NOT reveal:
+     • Which formula to use
+     • Which concept to apply
+     • Even whether the problem is numerical or logical
+   * The student must first figure out:
+     WHAT is happening
+     BEFORE figuring out
+     HOW to solve it.
+
+4. MULTI-ANGLE THINKING (MANDATORY):
+
+   * Each question must require at least TWO or MORE of the following:
+     • Reverse reasoning
+     • Constraint-based elimination
+     • Case analysis
+     • Counterfactual (“What if this condition was altered?”)
+     • Logical contradiction
+     • Inference from incomplete data
+     • Pattern recognition
+   * Single-path questions are NOT allowed.
+
+5. NO SIMILARITY — ZERO TOLERANCE:
+
+   * NO two questions may:
+     • Look similar
+     • Use the same logical structure
+     • Be solved using the same mental approach
+   * Each question must train a DIFFERENT mode of thinking.
+   * Imagine each question attacks the brain from a new direction.
+
+6. CONCEPT FUSION (WITHIN CHAPTER):
+
+   * Every question must combine MULTIPLE sub-concepts
+     from DIFFERENT parts of the SAME chapter.
+   * Simple, isolated concept testing is NOT allowed.
+
+7. THINKING BEFORE MATH:
+
+   * Computation must be secondary.
+   * The real challenge must be:
+     • Deciding assumptions
+     • Identifying variables
+     • Structuring the solution
+   * Even a strong calculator should NOT help without thinking.
+
+8. ELITE STUDENT FILTER:
+
+   * These questions should meaningfully challenge
+     the TOP 1% of Class 10 students.
+   * A normal “good student” should feel lost.
+   * A top student should feel challenged but intrigued.
+
+9. QUESTION STYLES (USE VARIETY):
+   Use a strategic mix of:
+
+   * Hidden-assumption problems
+   * Assertion–reason (non-obvious)
+   * Logical paradox-style questions
+   * Multi-case decision problems
+   * Reverse-result problems
+   * “Impossible unless…” problems
+   * Constraint-satisfaction problems
+
+10. NO SOLUTIONS:
+
+    * Do NOT provide hints.
+    * Do NOT provide steps.
+    * Do NOT provide answers.
+    * Only QUESTIONS.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SELF-VALIDATION / CONSISTENCY AUDIT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+11. DEEP THINKING REQUIRED:
+
+    * Before finalizing any question, deeply analyze whether the question is truly
+      hard for the intended level WITHOUT becoming ambiguous, unfair, or out of syllabus.
+    * Think through the question from multiple independent solution paths.
+
+12. ANSWER INVARIANCE:
+
+    * The final answer must remain exactly the same across all valid methods of solving.
+    * Even if the question can be approached in 100 different ways, every correct
+      approach must lead to one unique, consistent answer.
+    * If the question admits multiple different final answers, it is invalid.
+
+13. INTERNAL RE-EVALUATION:
+
+    * Re-check every generated question before outputting it.
+    * Validate:
+      • syllabus compliance
+      • uniqueness
+      • difficulty level
+      • presence of hidden ambiguity
+      • answer consistency
+      • correctness of any implied solution
+    * If any question fails validation, discard it and regenerate a better one.
+
+14. AMBIGUITY BAN:
+
+    * Do NOT output any question that can be interpreted in more than one valid way
+      unless the intended interpretation is made mathematically unavoidable from the PDF.
+    * If a question can be misunderstood, rewrite it.
+
+15. FINAL QUALITY FILTER:
+
+    * Only output questions that are:
+      • challenging
+      • syllabus-safe
+      • logically tight
+      • answer-consistent
+      • rechecked internally
+    * If uncertain, prefer not to output rather than output a flawed question.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+LANGUAGE & PRESENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+* Language must be precise, minimal, and neutral.
+* No emotional words.
+* No leading statements.
+* No accidental clues.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PDF RULE (STRICT):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+I will attach the official chapter PDF below.
+
+You must:
+
+* Use ONLY the concepts contained in that PDF.
+* NOT assume prior knowledge.
+* NOT import ideas from higher classes.
+
+BEGIN GENERATION ONLY AFTER THE PDF IS PROVIDED.
