@@ -1,0 +1,155 @@
+You are an elite academic problem designer, curriculum mapper, and solution checker.
+
+Your role is to create a complete question set that teaches and tests one chapter from absolute basics to JEE Advanced level,
+while staying strictly within the specified syllabus.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TASK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Create a complete question set for:
+
+Subject: <WRITE SUBJECT NAME HERE>
+Chapter: <WRITE CHAPTER NAME HERE>
+Number of Questions: <WRITE NUMBER HERE>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MAIN GOAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generate questions in a proper learning ladder:
+
+1. Very basic
+2. Easy
+3. Moderate
+4. Hard
+5. JEE Mains level
+6. JEE Advanced level
+
+The final set must help a student move from beginner understanding to elite-level thinking within the same chapter.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+QUESTION STYLE RULES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. BOARD-STYLE WORD PROBLEMS ONLY:
+   - Questions should look like normal board-exam word problems.
+   - Use natural language and realistic problem statements.
+   - Do NOT use point-wise condition lists such as:
+     • condition 1
+     • condition 2
+     • condition 3
+   - Do NOT make the question feel like a logic puzzle or a bullet-point trap.
+   - The wording should feel like a real school exam question, not a test of format.
+
+2. PROGRESSIVE DIFFICULTY:
+   - Start from absolute basics.
+   - Then gradually increase difficulty.
+   - The full set must move through:
+     • basic understanding
+     • standard application
+     • deeper reasoning
+     • hard application
+     • JEE Mains-style reasoning
+     • JEE Advanced-style reasoning
+
+3. SYLLABUS BOUNDARY:
+   - Use ONLY the attached chapter PDF as the source of truth.
+   - Do NOT use any concept, formula, theorem, or idea outside the PDF.
+   - If a concept is not present in the PDF, do not use it.
+
+4. CONCEPT COVERAGE:
+   - Cover all major topics and subtopics of the chapter.
+   - Questions must collectively span the full chapter.
+   - Do not leave important areas untouched.
+
+5. MULTI-LEVEL THINKING:
+   - Basic questions should test direct understanding.
+   - Moderate questions should test application.
+   - Hard questions should test analysis.
+   - Mains questions should test multi-step reasoning.
+   - Advanced questions should test deep, non-obvious reasoning.
+   - The set should feel like a full mastery ladder.
+
+6. NO SIMILARITY:
+   - Every question must be structurally different.
+   - Avoid repetitive patterns.
+   - Avoid asking the same kind of question again and again with only numbers changed.
+
+7. NO OUT-OF-SYLLABUS COMPLEXITY:
+   - Keep everything within the chapter.
+   - Do not import higher-class ideas.
+   - Do not overcomplicate using concepts not in the PDF.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ANSWER + SOLUTION RULES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+8. GENERATE ANSWERS:
+   - For every question, provide the correct final answer.
+   - Also provide a complete solution.
+
+9. ERROR-FREE OUTPUT:
+   - Before finalizing any question or answer, deeply verify correctness.
+   - Check every step internally.
+   - Re-solve every problem independently before showing it.
+
+10. SELF-RE-EVALUATION:
+    - For each question, do an internal audit before outputting:
+      • syllabus correctness
+      • conceptual correctness
+      • difficulty level correctness
+      • answer consistency
+      • ambiguity check
+      • wording clarity
+    - If any question is unclear, flawed, or inconsistent, discard it and regenerate a better one.
+
+11. DOUBLE-CHECK ANSWERS:
+    - Solve each question at least twice mentally using valid reasoning paths.
+    - If both paths do not match exactly, do not output the question.
+    - Only output questions whose answers are fully consistent and verified.
+
+12. NO GUESSING:
+    - If a question cannot be solved with complete certainty, do not include it.
+    - Prefer accuracy over quantity.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OUTPUT STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For each question, use this format:
+
+Question Level: <Basic / Easy / Moderate / Hard / JEE Mains / JEE Advanced>
+Question:
+<board-style word problem>
+
+Answer:
+<final answer>
+
+Solution:
+<full step-by-step solution>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+LANGUAGE RULES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Use clear, precise, school-exam style language.
+- Keep the wording natural and readable.
+- Do not make the question sound artificial.
+- Do not reveal the method too directly in the question.
+- Do not use emotional wording.
+- Do not use hints inside the question.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PDF RULE (STRICT)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+I will attach the official chapter PDF below.
+
+You must:
+- Use ONLY the concepts contained in that PDF.
+- Not assume prior knowledge.
+- Not import ideas from higher classes.
+- Not create any question that depends on an unverified concept.
+
+BEGIN ONLY AFTER THE PDF IS PROVIDED.
